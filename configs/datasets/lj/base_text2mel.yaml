@@ -1,0 +1,14 @@
+base_config: egs/egs_bases/tts/base.yaml
+raw_data_dir: ./dataset/LJSpeech-1.1
+preprocess_cls: configs.datasets.lj.preprocess.LJPreprocess
+processed_data_dir: ./dataset/processed/ljspeech
+binary_data_dir: ./dataset/binary/ljspeech
+binarization_args:
+  train_range: [600, -1]
+  test_range: [0, 500]
+  valid_range: [500, 600]
+num_spk: 1
+
+vocoder_cls: models.vocoder.bigvgan.BigVGAN
+vocoder_config: configs/models/vocoder/bigvgan.yaml
+vocoder_ckpt: checkpoints/bigvgan_base_22khz_80band/g_05000000.zip

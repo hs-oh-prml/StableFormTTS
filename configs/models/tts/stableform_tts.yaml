@@ -1,0 +1,69 @@
+base_config:
+  - ./base.yaml
+  - configs/datasets/libritts16k/base_text2mel.yaml
+
+task_cls: tasks.tts.stableform_tts.StableFormTTSTask
+dataset_cls: tasks.tts.dataset_utils.StableFormTTSDataset
+model_cls: models.tts.stableform_tts.StableFormTTS
+
+
+# model
+hidden_size: 256
+spk_emb_dim: 64
+n_spks: 1
+# fft enc/dec
+encoder_layers: 4
+encoder_ffn_kernel_size: 9
+decoder_layers: 2
+decoder_ffn_kernel_size: 9
+num_heads: 2
+ffn_act: relu
+ffn_hidden_size: 1024
+dropout: 0.1
+
+# duration
+predictor_kernel: 3
+predictor_layers: 3
+predictor_dropout: 0.5
+
+use_energy_embed: true
+use_pitch_embed: true
+
+# loss lambda
+lambda_f0: 1.0
+lambda_uv: 1.0
+lambda_energy: 1.0
+lambda_dur: 1.0
+lambda_ctc: 0.1
+
+# train and eval
+warmup_updates: 4000
+max_updates: 1000000
+max_sentences: 16
+
+use_spk_id: false
+betabinom_scaling_factor: 1.0
+binarization_start_iter: 6000
+binarization_loss_weight: 1.0
+kl_loss_start_iter: 18000
+
+# decoder parameters
+dec_dim: 64
+beta_min: 0.05
+beta_max: 20.0
+pe_scale: 1000
+out_size: 128 
+
+dur_model_config:
+  bottleneck_hparams: 
+    in_dim: 256
+    reduction_factor: 16
+    norm: "weightnorm"
+    non_linearity: "relu"
+  take_log_of_input: true
+  arch_hparams: 
+    out_dim: 1
+    n_layers: 2
+    n_channels: 256
+    kernel_size: 3
+    p_dropout: 0.25

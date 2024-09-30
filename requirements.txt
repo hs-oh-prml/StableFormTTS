@@ -1,0 +1,15 @@
+PyYAML
+numpy
+tqdm
+pyloudnorm
+scikit-image
+torch
+torchaudio
+textgrid
+six
+pycwt
+g2p_en
+praat-parselmouth
+pandas
+tensorboard
+einops
